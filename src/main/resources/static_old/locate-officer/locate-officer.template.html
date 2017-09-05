@@ -1,0 +1,63 @@
+<div style="color:#a50109 !important" class="jumbotron text-center">
+    <h1>Locate Officer</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <form novalidate>
+            <div class="col-lg-3">
+                <p>Search by
+                    <select ng-model="$ctrl.criteria" ng-change="$ctrl.reset()">
+                        <option value="id">Officer ID</option>
+                        <option value="name">Name</option>
+                    </select>
+            </div>
+            <div class="col-lg-3">
+                <p>Transit
+                    <input type="text" ng-model="$ctrl.transit" disabled size="5">
+                </p>
+            </div>
+            <div class="col-lg-3">
+                <p  ng-show="$ctrl.criteria=='id'">Officer ID
+                    <input type="text" size="7" min="7" maxlength="7" autofocus="autofocus" ng-model="$ctrl.officerId">
+                </p>
+                <p  ng-show="$ctrl.criteria=='name'">First Name
+                    <input type="text" size="25" ng-model="$ctrl.firstName">
+                </p>
+                <p  ng-show="$ctrl.criteria=='name'">Last Name
+                    <input type="text" size="25" ng-model="$ctrl.lastName" autofocus="autofocus">
+
+                </p>
+            </div>
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-primary" ng-show="$ctrl.validInput()" ng-click="$ctrl.locate()">Find</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container"  ng-show="$ctrl.officers.length>0">
+        <h1>Located</h1>
+        <div class="row">
+            <div class="col-lg-12 center-block">
+                <div class="list-group">
+                    <a ng-repeat="officer in $ctrl.officers" href="#!/officer/{{officer.officerId}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <!-- ng-dblclick="$ctrl.view(officer.officerId)"
+                       ng-click="$ctrl.select(officer.officerId, officer.branch.transitNum)" ng-blur="$ctrl.unSelect()">-->
+                        <div class="d-flex w-100 justify-content-between">
+                            <p class="mb-1 text-center">Name: {{officer.firstName}} {{officer.lastName}}</p>
+                            <p class="mb-1 text-center">Officer ID: {{officer.officerId}}</p>
+                            <p class="mb-1 text-center">Role/Level: {{officer.role}} {{officer.level}}</p>
+                        </div>
+                    </a>
+                </div>
+        </div>
+        <!--
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <button type="button" class="btn btn-primary" ng-show="$ctrl.officerSelected" ng-click="$ctrl.view()">View/Change</button>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+</div>
